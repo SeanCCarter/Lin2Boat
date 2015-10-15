@@ -6,7 +6,16 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
     time = 0;
     for i = 1:length(X)-1
         angle = windangle(X(i,:),X(i+1,:));
-        time = time + distancebetweenpoints(X(i,:),X(i+1,:))*norm(windX,windY)*(angle-pi/6)/(pi);
+        if angle > 180
+            angle = 360 -angle;
+        end
+        speed = norm(windX,windY)*(angle-pi/6)/(pi);
+        if speed > 0
+            time = time + distancebetweenpoints(X(i,:),X(i+1,:))/speed;     
+        else
+            time = time + distancebetweenpoints(X(i,:),X(i+1,:))*100000;
+        end
+        
     end
     res = time;
 

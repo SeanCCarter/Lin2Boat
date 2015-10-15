@@ -3,8 +3,8 @@ function res = letsdoathing(nWaypoints, startPoint, endPoint)
     nWaypoints = 4;
     startPoint = [2,-1];
     endPoint = [1,1];
-    windX = 10/sqrt(2);
-    windY = 10/sqrt(2);
+    windX = -2;
+    windY = 1;
     
     X0 = [];
     %Navigating from -1,-1 to 1,1
