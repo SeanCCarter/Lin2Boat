@@ -1,10 +1,16 @@
 function res = letsdoathing(nWaypoints, startPoint, endPoint)
-
+    % set number of waypoints, start point, and end point
     nWaypoints = 4;
     startPoint = [2,-1];
     endPoint = [1,1];
-    windX = -2;
-    windY = 1;
+    
+    % wangle is the direction the wind is COMING FROM
+    % wind speed is in knots
+    wangle = 3*pi/4;
+    wspeed = 2;
+    % x and y values of wind vector are calculated
+    windX = wspeed*cos(wangle);
+    windY = wspeed*sin(wangle);
     
     X0 = [];
     %Navigating from -1,-1 to 1,1
@@ -21,5 +27,5 @@ function res = letsdoathing(nWaypoints, startPoint, endPoint)
     thing = [startPoint;x;endPoint];
     plot(thing(:,1),thing(:,2))
     
-    
+    res = fval;    
 end
