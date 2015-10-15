@@ -1,6 +1,6 @@
 function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
     %Points is a matrix X,Y coordinates
-   
+    
     X = [startPoint;Points;endPoint];
     
     time = 0;
@@ -17,5 +17,13 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
         dx = p2(1) - p1(1);
         dy = p2(2) - p1(2);
         res = norm([dx,dy]);
+    end
+
+    function res = windangle(p1,p2)
+        pathx = p2(1) - p1(1);
+        pathy = p2(2) - p1(2);
+        wind = [windX, windY];
+        path = [pathx, pathy];
+        res = acos(dot(wind,path));
     end
 end
