@@ -1,16 +1,18 @@
 function res = letsdoathing(nWaypoints, startPoint, endPoint)
     % set number of waypoints, start point, and end point
     nWaypoints = 4;
-    startPoint = [2,-1];
-    endPoint = [1,1];
+    startPoint = [2,1];
+    endPoint = [1,2];
     
     % wangle is the direction the wind is COMING FROM
     % wind speed is in knots
     wangle = 3*pi/4;
     wspeed = 2;
     % x and y values of wind vector are calculated
-    windX = wspeed*cos(wangle);
-    windY = wspeed*sin(wangle);
+    % n is the number of values in the grid
+    n = 10;
+    windX = wspeed*cos(wangle)*ones(n);
+    windY = wspeed*sin(wangle)*ones(n);
     
     X0 = [];
     %Navigating from -1,-1 to 1,1
