@@ -12,7 +12,7 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
             %tackwindx = interp2(windX, X(step+1,1), X(step+1,2));
             %tackwindy = interp2(windY, X(step+1,1), X(step+1,2));
             tackwindx = -1.4142;
-            tackwindy = 1.4142;
+            tackwindy = 1.41
             totalTime = totalTime + tacktime(X(step,:), X(step+1,:), X(step+2,:), tackwindx, tackwindy);
         end
     end
