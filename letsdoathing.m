@@ -1,12 +1,12 @@
 function res = letsdoathing(nWaypoints, startPoint, endPoint)
     % set number of waypoints, start point, and end point
-    nWaypoints = 4;
+    nWaypoints = 8;
     startPoint = [2,1];
     endPoint = [1,2];
     
     % wangle is the direction the wind is COMING FROM
     % wind speed is in knots
-    wangle = 5*pi/4;
+    wangle = 3*pi/4;
     wspeed = 2;
     % x and y values of wind vector are calculated
     % n is the number of values in the grid
@@ -25,8 +25,8 @@ function res = letsdoathing(nWaypoints, startPoint, endPoint)
     %X0(2,1) = .1
     
     hold on
-        
-    [x, fval] = fminunc(@(Points)getTimeFromPoints(startPoint, endPoint, Points, windX, windY), X0)
+    
+    [x, fval] = fmincon(@(Points)getTimeFromPoints(startPoint, endPoint, Points, windX, windY), X0, [], [], [], [], ones(nWaypoints, 2), Inf)
     
     clf
     thing = [startPoint;x;endPoint];

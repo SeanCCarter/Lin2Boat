@@ -9,10 +9,8 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
         totalTime = totalTime + speedOfPath(interpolated_path);
         %add penalty for tacking
         if step < (length(X) - 1)
-            %tackwindx = interp2(windX, X(step+1,1), X(step+1,2));
-            %tackwindy = interp2(windY, X(step+1,1), X(step+1,2));
-            tackwindx = -1.4142;
-            tackwindy = 1.4142;
+            tackwindx = interp2(windX, X(step+1,1), X(step+1,2));
+            tackwindy = interp2(windY, X(step+1,1), X(step+1,2));
             totalTime = totalTime + tacktime(X(step,:), X(step+1,:), X(step+2,:), tackwindx, tackwindy);
         end
     end
@@ -30,10 +28,8 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
            
 
     function res = speedOfPath(path)
-        %X_wind = interp2(windX, path(:,1), path(:,2), 'linear');
-        %Y_wind = interp2(windY, path(:,1), path(:,2), 'linear');
-        X_wind = -1.4142*ones(17,1);
-        Y_wind = 1.4142*ones(17,1);
+        X_wind = interp2(windX, path(:,1), path(:,2), 'linear');
+        Y_wind = interp2(windY, path(:,1), path(:,2), 'linear');
         time = 0;
         for i = 1:length(path)-1
             %determine relative wind angle
@@ -71,7 +67,6 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
         %given three waypoints
         %determines how long it takes to adjust course at p2
         angle1 = windangle(p1, p2, wx, wy);
-        disp(angle1)
         if angle1 > pi
             angle1 = angle1 - 2*pi;
         end
