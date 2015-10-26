@@ -46,8 +46,6 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
 %                 speed = abs(angle/10);
 %             end
             time = time + distancebetweenpoints(path(i,:),path(i+1,:))/speed;
-            if i<=length(path
-            time = time + tacktime(path(1,:), path(i+1,:), path(i+2,:), X_wind(i+1), Y_wind(i+1));
         end
         res = time;
     end
@@ -60,11 +58,18 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
 
 
     function res = windangle(p1,p2, wX, wY)
+        %given two [x,y] points and the wind X and Y values
+        %returns the angle between the wind and the boat heading
+        %from -pi to pi. starboard tack is positive.
         pathx = p2(1) - p1(1);
         pathy = p2(2) - p1(2);
-        wind = [wX, wY];
-        path = [pathx, pathy];
-        res = acos(dot(wind,path)/(norm(wind)*norm(path)));
+        wnd = atan(wY/wX);
+        pth = atan(pathy/pathx);
+        ang = wnd - pth;
+        if ang > pi
+            ang = ang - 2*pi
+        end
+        res = ang
     end
     
     function res = tacktime(p1, p2, p3, wx, wy)
