@@ -6,7 +6,7 @@ function res = letsdoathing(nWaypoints, startPoint, endPoint)
     
     % wangle is the direction the wind is GOING TOWARD
     % wind speed is in knots
-    wangle = 5*pi/4;
+    wangle = 5*pi/4 + .1;
     wspeed = 2;
     % x and y values of wind vector are calculated
     % n is the number of values in the grid
@@ -32,7 +32,7 @@ function res = letsdoathing(nWaypoints, startPoint, endPoint)
     thing = [startPoint;x;endPoint];
     hold on
     plot(X0(:,1), X0(:,2),'g')
-      %quiver(1,1,windX, windY)
+    quiver(endPoint(1), endPoint(2),windX(1), windY(1),'b')
     plot(thing(:,1),thing(:,2),'r')
     plot(thing(:,1),thing(:,2),'r.')
     

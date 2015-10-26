@@ -81,7 +81,7 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
         if sign(angle1) == sign(angle2)
             delay = 0;
         else
-            delay = 1;
+            delay = 5;
         end
 
         res = delay;
