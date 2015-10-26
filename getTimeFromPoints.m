@@ -39,10 +39,12 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
             end
             
             %Finding the boat speed
-            speed = norm([X_wind(i),Y_wind(i)])*(angle-pi/6)/(pi);
-            if angle < 30
-                speed = abs(angle/10);
-            end
+            %ooh aah limacon
+            speed = norm([X_wind(i), Y_wind(i)])*(0.45*cos(angle) + 0.55);
+%             speed = norm([X_wind(i),Y_wind(i)])*(angle-pi/6)/(pi);
+%             if angle < 30
+%                 speed = abs(angle/10);
+%             end
             time = time + distancebetweenpoints(path(i,:),path(i+1,:))/speed;
         end
         res = time;

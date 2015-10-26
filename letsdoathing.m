@@ -1,12 +1,12 @@
 function res = letsdoathing(nWaypoints, startPoint, endPoint)
     % set number of waypoints, start point, and end point
-    nWaypoints = 8;
-    startPoint = [2,1];
-    endPoint = [1,2];
+    nWaypoints = nWaypoints;
+    startPoint = startPoint;
+    endPoint = endPoint;
     
-    % wangle is the direction the wind is COMING FROM
+    % wangle is the direction the wind is GOING TOWARD
     % wind speed is in knots
-    wangle = 3*pi/4;
+    wangle = 5*pi/4;
     wspeed = 2;
     % x and y values of wind vector are calculated
     % n is the number of values in the grid
