@@ -33,7 +33,10 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
         time = 0;
         for i = 1:length(path)-1
             %determine relative wind angle
-            angle = abs(windangle(path(i,:), path(i+1,:), X_wind(i), Y_wind(i)));
+            angle = windangle(path(i,:), path(i+1,:), X_wind(i), Y_wind(i));
+            if angle > pi
+                angle = 2*pi - angle;
+            end
             
             %Finding the boat speed
             %ooh aah limacon
@@ -55,25 +58,26 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
 
 
     function res = windangle(p1,p2, wX, wY)
-        %given two [x,y] points and the wind X and Y values
-        %returns the angle between the wind and the boat heading
-        %from -pi to pi. starboard tack is positive.
         pathx = p2(1) - p1(1);
         pathy = p2(2) - p1(2);
-        wnd = atan2(wY,wX);
-        pth = atan2(pathy, pathx);
-        ang = 180 - (wnd - pth);
-        if ang > pi
-            ang = ang - 2*pi;
-        end
-        res = ang;
+        wind = [wX, wY];
+        path = [pathx, pathy];
+        res = acos(dot(wind,path)/(norm(wind)*norm(path)));
     end
     
     function res = tacktime(p1, p2, p3, wx, wy)
         %given three waypoints
         %determines how long it takes to adjust course at p2
         angle1 = windangle(p1, p2, wx, wy);
+        if angle1 > pi
+            angle1 = angle1 - 2*pi;
+        end
+        
         angle2 = windangle(p2, p3, wx, wy);
+        if angle2 > pi
+            angle2 = angle2 - 2*pi;
+        end
+              
         if sign(angle1) == sign(angle2)
             disp('Didnt delay')
             delay = 0;
