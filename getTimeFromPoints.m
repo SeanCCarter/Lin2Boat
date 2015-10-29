@@ -33,10 +33,7 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
         time = 0;
         for i = 1:length(path)-1
             %determine relative wind angle
-            angle = windangle(path(i,:), path(i+1,:), X_wind(i), Y_wind(i));
-            if angle > pi
-                angle = 2*pi - angle;
-            end
+            angle = abs(windangle(path(i,:), path(i+1,:), X_wind(i), Y_wind(i)));
             
             %Finding the boat speed
             %ooh aah limacon
@@ -56,14 +53,16 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
         res = norm([dx,dy]);
     end
 
-
     function res = windangle(p1,p2, wX, wY)
+        %given two points and wind x and y
+        %determines angle between wind and boat
+        %from -pi to pi
         pathx = p2(1) - p1(1);
         pathy = p2(2) - p1(2);
         wnd = atan2(wY,wX);
         pth = atan2(pathy, pathx);
         ang = pi - (wnd - pth);
-        disp([wnd, pth, ang])
+        %disp([wnd, pth, ang])
         if ang > pi
             ang = ang - 2*pi;
         end
