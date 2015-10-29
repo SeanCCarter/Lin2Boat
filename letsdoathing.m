@@ -11,9 +11,9 @@ function res = letsdoathing(nWaypoints, startPoint, endPoint)
     wspeed = 2;
     % x and y values of wind vector are calculated
     % n is the number of values in the grid
-    n = 100;
-    windX = wspeed*cos(wangle)*ones(n);
-    windY = wspeed*sin(wangle)*ones(n);
+    n = 30;
+    windX = makeWindFun(n,n);
+    windY = makeWindFun(n,n);
     
     % generates a random squiggle sort of between the points as first guess
     X0 = [];
@@ -22,9 +22,6 @@ function res = letsdoathing(nWaypoints, startPoint, endPoint)
         X0(i,2) = startPoint(2) + (rand*(endPoint(2) - startPoint(2))/(nWaypoints+1)) * i;
     end
     
-    %X0(1,1) = -0.1
-    %X0(2,1) = .1
-    
     hold on
     
     [x, fval] = fmincon(@(Points)getTimeFromPoints(startPoint, endPoint, Points, windX, windY), X0, [], [], [], [], ones(nWaypoints, 2), Inf)
@@ -32,10 +29,12 @@ function res = letsdoathing(nWaypoints, startPoint, endPoint)
     clf
     thing = [startPoint;x;endPoint];
     hold on
-    plot(X0(:,1), X0(:,2),'g')
-    quiver(endPoint(1), endPoint(2),-windX(1), -windY(1),'b', 'LineWidth', 1)
+
+    %plot(X0(:,1), X0(:,2),'g')
+    quiver(-1.*windX, -1.*windY)
     plot(thing(:,1),thing(:,2),'r')
     plot(thing(:,1),thing(:,2),'r.')
+    axis([10,20,10,20])
     legend('First Guess', 'Wind', 'Optimal Path')
     axis equal
     res = fval;    
