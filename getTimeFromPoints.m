@@ -62,7 +62,8 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
         pathy = p2(2) - p1(2);
         wnd = atan2(wY,wX);
         pth = atan2(pathy, pathx);
-        ang = 180 - (wnd - pth);
+        ang = pi - (wnd - pth);
+        disp([wnd, pth, ang])
         if ang > pi
             ang = ang - 2*pi;
         end
@@ -79,7 +80,7 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
             delay = 0;
         else
             disp('Did delay')
-            delay = 15;
+            delay = 5;
         end
 
         res = delay;
