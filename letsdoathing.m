@@ -4,9 +4,10 @@ function res = letsdoathing(nWaypoints, startPoint, endPoint)
     startPoint = startPoint;
     endPoint = endPoint;
     
-    % wangle is the direction the wind is GOING TOWARD
+    % wangle is the direction the wind is COMING FROM
     % wind speed is in knots
-    wangle = 5*pi/4;
+
+    wangle = -3*pi/4;
     wspeed = 2;
     % x and y values of wind vector are calculated
     % n is the number of values in the grid
