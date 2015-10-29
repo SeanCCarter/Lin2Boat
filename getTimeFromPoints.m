@@ -79,9 +79,11 @@ function res = getTimeFromPoints(startPoint, endPoint, Points, windX,windY)
         end
               
         if sign(angle1) == sign(angle2)
+            disp('Didnt delay')
             delay = 0;
         else
-            delay = 5;
+            disp('Did delay')
+            delay = 15;
         end
 
         res = delay;
